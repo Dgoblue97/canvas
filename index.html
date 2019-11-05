@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+			width: 80%;
+			height: 80%;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "800" height = "800"  > </canvas>
+    <input type = "color" id = "picker"/>
+<script>
+
+	var canvas = document.querySelector('#myCanvas');
+	var ctx = canvas.getContext('2d');
+	var color = 'red';
+	var input = document.querySelector('#picker');
+	var drawing = true
+	canvas.width = window.innerWidth *.8;
+	canvas.height = window.innerHeight *.8;
+
+
+
+	function draw(posX, posY) {
+		if (drawing==true){
+			ctx.fillStyle = color;
+			console.log(ctx.fillStyle);
+		  // console.log('I am drawing');
+			// ctx.fillStyle = color;
+			ctx.beginPath();
+		  ctx.arc(posX,posY,10,0,2 * Math.PI);
+			// ctx.fillStyle = color;
+		  ctx.fill();
+		}
+
+	}
+
+
+</script>
+
+<script>
+
+
+
+
+myCanvas.addEventListener(
+	  'mousemove', function(e){
+	    // console.log(e.x);
+	    // console.log(e.y);
+	    draw(e.x, e.y);
+			// console.log(e)
+	  }
+	);
+
+
+// 	window.addEventListener('keydown', function(e){
+// 		console.log(e);
+// 	}
+// );
+
+// myCanvas.addEventListener('keydown')
+
+	window.addEventListener('keydown', function(e){
+			// console.log(e);
+
+			if (e.code == "KeyR" ){
+				console.log("In R Key");
+				color = 'red';
+				// ctx.fillStyle = color;
+			}
+			else if (e.code == "KeyG"){
+				color = 'green';
+				// ctx.fillStyle = color;
+			}
+			else if (e.code == "KeyY"){
+				color = 'yellow';
+				// ctx.fillStyle = color;
+			}
+			else if (e.code == "KeyB"){
+				color = 'blue';
+			}
+
+			else if (e.code == "Space"){
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+			}
+
+
+
+			else if (e.code == "ArrowUp"){
+			drawing = false;
+		}
+			// else if (e.code == "ArrowUp"){
+			// 	myCanvas.removeEventListener(
+			// 		  'mousemove', draw);
+				// 			draw(e.x, e.y);
+				// 		}
+				// );
+			// }
+
+			else if (e.code == "ArrowDown"){
+				drawing = true
+			}
+
+		}
+);
+
+
+picker.addEventListener('change',function(e){
+color = input.value
+
+console.log('In Picker');
+	}
+)
+
+
+
+
+</script>
+</body>
+</html>
